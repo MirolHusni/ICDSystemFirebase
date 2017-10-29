@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="my.edu.unikl.icdsystemfirebase.AdminHome">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvAdminName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="12dp"
+                    android:text="Welcome, Admin"
+                    android:textAlignment="center"
+                    android:textStyle="bold" />
+
+                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/profile_image"
+                    android:layout_width="96dp"
+                    android:layout_height="85dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_adminprofile"
+                    app:civ_border_color="#FF000000"
+                    app:civ_border_width="2dp" />
+
+            </LinearLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="320dp">
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cvaddevent"
+                    android:layout_width="102dp"
+                    android:layout_height="89dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="8dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginRight="8dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintHorizontal_bias="0.13"
+                    app:layout_constraintVertical_bias="0.121"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        tools:layout_editor_absoluteX="8dp"
+                        tools:layout_editor_absoluteY="8dp"
+                        android:weightSum="1">
+
+                        <ImageView
+                            android:id="@+id/ivAddEvent"
+                            android:layout_width="101dp"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_add_event" />
+
+                        <TextView
+                            android:id="@+id/tvEvent"
+                            android:layout_width="104dp"
+                            android:layout_height="wrap_content"
+                            android:text="Add event"
+                            android:textAlignment="center"
+                            tools:layout_editor_absoluteX="16dp"
+                            tools:layout_editor_absoluteY="97dp"
+                            android:layout_weight="0.07" />
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cvmanageuser"
+                    android:layout_width="103dp"
+                    android:layout_height="86dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginRight="8dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintHorizontal_bias="0.798"
+                    app:layout_constraintVertical_bias="0.12">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        tools:layout_editor_absoluteX="8dp"
+                        tools:layout_editor_absoluteY="8dp"
+                        android:weightSum="1">
+
+                        <ImageView
+                            android:id="@+id/ivManageUser"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
+                            app:srcCompat="@drawable/ic_user_admin" />
+
+                        <TextView
+                            android:id="@+id/tvUserManage"
+                            android:layout_width="104dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.07"
+                            android:text="Manage user"
+                            android:textAlignment="center"
+                            tools:layout_editor_absoluteX="16dp"
+                            tools:layout_editor_absoluteY="97dp" />
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cveventlist"
+                    android:layout_width="103dp"
+                    android:layout_height="86dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginRight="8dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintHorizontal_bias="0.132"
+                    app:layout_constraintVertical_bias="0.738">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        tools:layout_editor_absoluteX="8dp"
+                        tools:layout_editor_absoluteY="8dp"
+                        android:weightSum="1">
+
+                        <ImageView
+                            android:id="@+id/ivEventList"
+                            android:layout_width="match_parent"
+                            android:layout_height="63dp"
+                            android:layout_marginBottom="0dp"
+                            android:layout_marginTop="5dp"
+                            app:srcCompat="@drawable/ic_calendar" />
+
+                        <TextView
+                            android:id="@+id/tvEventList"
+                            android:layout_width="104dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.07"
+                            android:text="Event list"
+                            android:textAlignment="center"
+                            tools:layout_editor_absoluteX="16dp"
+                            tools:layout_editor_absoluteY="97dp" />
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cvlogout"
+                    android:layout_width="103dp"
+                    android:layout_height="86dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginRight="8dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintHorizontal_bias="0.8"
+                    app:layout_constraintVertical_bias="0.738">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        tools:layout_editor_absoluteX="8dp"
+                        tools:layout_editor_absoluteY="8dp"
+                        android:weightSum="1">
+
+                        <ImageView
+                            android:id="@+id/ivLogout"
+                            android:layout_width="match_parent"
+                            android:layout_height="63dp"
+                            android:layout_marginBottom="0dp"
+                            android:layout_marginTop="5dp"
+                            app:srcCompat="@drawable/ic_signoutadmin" />
+
+                        <TextView
+                            android:id="@+id/tvLogOut"
+                            android:layout_width="104dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.07"
+                            android:text="Log Out"
+                            android:textAlignment="center"
+                            tools:layout_editor_absoluteX="16dp"
+                            tools:layout_editor_absoluteY="97dp" />
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+
+            </android.support.constraint.ConstraintLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

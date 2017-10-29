@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "535427735229",
+    "firebase_url": "https://icdsystem-d39b7.firebaseio.com",
+    "project_id": "icdsystem-d39b7",
+    "storage_bucket": "icdsystem-d39b7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:535427735229:android:69c181018a5640c2",
+        "android_client_info": {
+          "package_name": "my.edu.unikl.icdsystemfirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "535427735229-5hvac8mvmsdoonihjp4hiiks5qnrd8be.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "my.edu.unikl.icdsystemfirebase",
+            "certificate_hash": "174954635a6068b5999eb1e0288872db7c0dd42a"
+          }
+        },
+        {
+          "client_id": "535427735229-3qgjl1rvi0ovu2p3jrbrd1p406jb6oj0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "my.edu.unikl.icdsystemfirebase",
+            "certificate_hash": "875048c972e0ccb94b75b2d4b3090d11a200f91c"
+          }
+        },
+        {
+          "client_id": "535427735229-g47h0119elqdaqbk606703rasilobm0f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAILVCQh5optqMSK3XciOBD2VI9HiWbzw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "535427735229-g47h0119elqdaqbk606703rasilobm0f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
