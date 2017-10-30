@@ -21,6 +21,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnRegister;
@@ -70,15 +73,27 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
          password  = inputPassword.getText().toString().trim();
 
         //checking if email and passwords are empty
-        if(TextUtils.isEmpty(email)){
-            Toast.makeText(this,"Please enter email",Toast.LENGTH_LONG).show();
+
+
+        if(TextUtils.isEmpty(username) && TextUtils.isEmpty(email) && TextUtils.isEmpty(password)){
+            inputFullName.setError("Username cannot be empty!");
+            inputEmail.setError("Email cannot be empty!");
+            inputPassword.setError("Password cannot be empty!");
+            return;
+        }
+        if (!isValidEmail(email)) {
+            inputEmail.setError("Invalid Email");
             return;
         }
 
-        if(TextUtils.isEmpty(password)){
-            Toast.makeText(this,"Please enter password",Toast.LENGTH_LONG).show();
+        if (!isValidPassword(password)) {
+            inputPassword.setError("Password too short");
             return;
         }
+
+
+
+
 
         //if the email and password are not empty
         //displaying a progress dialog
@@ -94,7 +109,22 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         //checking if success
                         if(task.isSuccessful()){
                             //display some message here
-                            updateUserProfile();
+                            user = FirebaseAuth.getInstance().getCurrentUser();
+
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(username)
+                                    .build();
+
+                            user.updateProfile(profileUpdates)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if(task.isSuccessful()){
+                                                Log.d("Updated", username+ user.getDisplayName());
+                                            }
+                                        }
+
+                                    });
                             AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                             builder.setTitle(email+", Congratulations!");
                             builder.setIcon(R.drawable.ic_applause);
@@ -145,26 +175,23 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    public void updateUserProfile(){
+    // validating email id
+    public boolean isValidEmail(String email) {
+        String EMAIL_PATTERN = "^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@"
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
-        user = FirebaseAuth.getInstance().getCurrentUser();
-
-        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                .setDisplayName(username)
-                .build();
-
-        user.updateProfile(profileUpdates)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            Log.d("Updated", username+ user.getDisplayName());
-                        }
-                    }
-
-                });
-
-
+        Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
     }
+
+    // validating password with retype password
+    public boolean isValidPassword(String pass) {
+        if (pass != null && pass.length() > 6) {
+            return true;
+        }
+        return false;
+    }
+
 }
 
