@@ -128,30 +128,35 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private void loadUserPhoto(){
 
-        DatabaseReference databaseReference = database.getInstance().getReference();
-        Query queryUser = databaseReference.child("Users").orderByChild(user.getUid());
-        queryUser.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    // Log.d("User key", child.getKey());
-                    Log.d("User val", child.child("uPhotoUrl").getValue().toString());
+        try {
 
-                    Glide.with(ProfileActivity.this).load( child.child("uPhotoUrl").getValue().toString())
-                            .crossFade()
-                            .thumbnail(0.5f)
-                            .bitmapTransform(new CircleTransform(ProfileActivity.this))
-                            .diskCacheStrategy(DiskCacheStrategy.ALL)
-                            .into(imgProfile);
+            DatabaseReference databaseReference = database.getInstance().getReference();
+            Query queryUser = databaseReference.child("Users").orderByChild(user.getUid());
+            queryUser.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot child : dataSnapshot.getChildren()) {
+                        // Log.d("User key", child.getKey());
+                        Log.d("User val", child.child("uPhotoUrl").getValue().toString());
+
+                        Glide.with(ProfileActivity.this).load(child.child("uPhotoUrl").getValue().toString())
+                                .crossFade()
+                                .thumbnail(0.5f)
+                                .bitmapTransform(new CircleTransform(ProfileActivity.this))
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .into(imgProfile);
+                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
 
+        }catch (Exception e){
+            Log.d("Error loaduserPhoto", e.getMessage());
+        }
     }
 
 
