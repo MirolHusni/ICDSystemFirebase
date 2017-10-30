@@ -22,8 +22,10 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -131,13 +133,13 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         try {
 
             DatabaseReference databaseReference = database.getInstance().getReference();
-            Query queryUser = databaseReference.child("Users").orderByChild(user.getUid());
+            Query queryUser = databaseReference.child("Users").orderByChild("uid").equalTo(user.getUid());
             queryUser.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
                         // Log.d("User key", child.getKey());
-                        Log.d("User val", child.child("uPhotoUrl").getValue().toString());
+                        Log.d("Profile activity: ", child.child("uPhotoUrl").getValue().toString());
 
                         Glide.with(ProfileActivity.this).load(child.child("uPhotoUrl").getValue().toString())
                                 .crossFade()
@@ -230,12 +232,13 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                         dialog.dismiss();
                         //Display success toast msg
                         Toast.makeText(getApplicationContext(), "Image uploaded", Toast.LENGTH_SHORT).show();
-                        UserInformation userUpload = new UserInformation(UUID.randomUUID().toString(), etUsername.getText().toString().trim(),
+                        UserInformation userUpload = new UserInformation(user.getUid(), etUsername.getText().toString().trim(),
                                 etPassword.getText().toString().trim(), etPhone.getText().toString().trim() ,taskSnapshot.getDownloadUrl().toString());
+
 
                         //Save image info in to firebase database
                         String uploadId = user.getUid();
-                        myRef.child("Users").child(uploadId).setValue(userUpload);
+                        myRef.child("Users").child(user.getUid()).setValue(userUpload);
 
                         clearEditText();
 

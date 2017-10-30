@@ -145,13 +145,13 @@ public class MainActivity extends AppCompatActivity
     private void loadUserPhoto(){
 
         DatabaseReference databaseReference = myDB.getInstance().getReference();
-        Query queryUser = databaseReference.child("Users").orderByChild(user.getUid());
+        Query queryUser = databaseReference.child("Users").orderByChild("uid").equalTo(user.getUid());
         queryUser.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
-                   // Log.d("User key", child.getKey());
-                    Log.d("User val", child.child("uPhotoUrl").getValue().toString());
+                    Log.d("MA User phone", child.child("uid").getValue().toString());
+                    Log.d("MA User photo", child.child("uPhotoUrl").getValue().toString());
 
                     Glide.with(MainActivity.this).load( child.child("uPhotoUrl").getValue().toString())
                             .crossFade()
