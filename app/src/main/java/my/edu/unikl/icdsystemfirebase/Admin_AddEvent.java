@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -31,11 +32,12 @@ public class Admin_AddEvent extends AppCompatActivity implements View.OnClickLis
 
 
     private int LEVELSELECTION;
-    private TextInputEditText input_evName, input_evDesc,etDate,input_Date;
-    private TextInputLayout tilEvName, tilEvDesc, tilEvDate;
-    private Spinner spinnerLvl;
+    private String CrowdStatus;
+
+    private EditText input_evName, input_evDesc,etDate,input_Date;
+    private Spinner spinnerLvl, spinnerCS;
     private ListView list_data;
-    private Button btnDate;
+    private Button btnDate , btnAddEvent;
     private ProgressBar circular_progress;
 
 
@@ -56,34 +58,24 @@ public class Admin_AddEvent extends AppCompatActivity implements View.OnClickLis
 
 
 
-        etDate = (TextInputEditText) findViewById(R.id.etDate);
         btnDate = (Button) findViewById(R.id.selectDate);
         btnDate.setOnClickListener(this);
 
-        tilEvName = (TextInputLayout) findViewById(R.id.tilEvName);
+        btnAddEvent = (Button) findViewById(R.id.btnAddEvent);
+        btnAddEvent.setOnClickListener(this);
 
+        //Spinner
+        spinnerLvl = (Spinner) findViewById(R.id.spinner2);
+        spinnerLvl.setOnItemSelectedListener(this);
 
-
-
-    //  CircleImageView cirImage = (CircleImageView)findViewById(R.id.profile_image);
-    //  cirImage.setOnClickListener(new View.OnClickListener() {
-    //
-    //      @Override
-    //      public void onClick(View arg0) {
-    //
-    //          Intent i = new Intent(
-    //                  Intent.ACTION_PICK,
-    //                  android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-    //
-    //          startActivityForResult(i, RESULT_LOAD_IMAGE);
-    //      }
-    //  });
+        spinnerCS = (Spinner) findViewById(R.id.spinnerCrowd);
+        spinnerCS.setOnItemSelectedListener(this);
 
         //Control
         circular_progress = (ProgressBar)findViewById(R.id.circular_progress);
-        input_evName = (TextInputEditText) findViewById(R.id.etEvName);
-        input_evDesc = (TextInputEditText)findViewById(R.id.etEvDesc);
-        input_Date = (TextInputEditText) findViewById(R.id.etDate);
+        input_evName = (EditText) findViewById(R.id.etEvName);
+        input_evDesc = (EditText)findViewById(R.id.etEvDesc);
+        input_Date = (EditText) findViewById(R.id.etDate);
 
    //   list_data = (ListView)findViewById(R.id.list_data);
    //   list_data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -95,10 +87,6 @@ public class Admin_AddEvent extends AppCompatActivity implements View.OnClickLis
    //           input_evDesc.setText(user.getEvDesc());
    //       }
    //   });
-
-
-        spinnerLvl = (Spinner) findViewById(R.id.spinner2);
-        spinnerLvl.setOnItemSelectedListener(this);
 
 
 
@@ -144,36 +132,31 @@ public class Admin_AddEvent extends AppCompatActivity implements View.OnClickLis
         mDatabaseReference  = mFirebaseDatabase.getReference();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main,menu);
-        return super.onCreateOptionsMenu(menu);
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.menu_add)
         {
-            String lvlSelect = "level";
-            switch (LEVELSELECTION){
-
-                case 0 : lvlSelect = "Level3Events";
-                    break;
-                case 1 : lvlSelect = "SurauEvents";
-                    break;
-                case 2 : lvlSelect = "LpsEvents";
-                    break;
-                case 3 : lvlSelect = "Level25Events";
-                    break;
-
-            }
-            createEvent(lvlSelect);
-
+         //  String lvlSelect = "level";
+         //  switch (LEVELSELECTION){
+         //
+         //      case 0 : lvlSelect = "Level3Events";
+         //          break;
+         //      case 1 : lvlSelect = "SurauEvents";
+         //          break;
+         //      case 2 : lvlSelect = "LpsEvents";
+         //          break;
+         //      case 3 : lvlSelect = "Level25Events";
+         //          break;
+         //
+         //  }
+         //  createEvent(lvlSelect);
+         //
         }
         else if(item.getItemId() == R.id.menu_save)
         {
             AdminEvent user = new AdminEvent(selectedUser.getUid(), input_evName.getText().toString(), input_evDesc.getText().toString(),
-                    input_Date.getText().toString());
+                    input_Date.getText().toString(), CrowdStatus);
             updateEvent(user);
         }
         else if(item.getItemId() == R.id.menu_remove){
@@ -202,14 +185,13 @@ public class Admin_AddEvent extends AppCompatActivity implements View.OnClickLis
         if(!input_evName.getText().toString().equals("")){
 
             AdminEvent ev = new AdminEvent(UUID.randomUUID().toString(), input_evName.getText().toString(), input_evDesc.getText().toString()
-                    ,input_Date.getText().toString());
+                    ,input_Date.getText().toString(), CrowdStatus);
             mDatabaseReference.child("Events").child(lvlSelection).child(ev.getUid()).setValue(ev);
             Toast.makeText(this, "Event added to database", Toast.LENGTH_SHORT).show();
             clearEditText();
 
         }else {
             Toast.makeText(this, "Please enter event name", Toast.LENGTH_SHORT).show();
-            tilEvName.setError("Name not entered");
         }
 
 
@@ -222,29 +204,7 @@ public class Admin_AddEvent extends AppCompatActivity implements View.OnClickLis
     }
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
-            Uri selectedImage = data.getData();
-            String[] filePathColumn = { MediaStore.Images.Media.DATA };
-
-            Cursor cursor = getContentResolver().query(selectedImage,
-                    filePathColumn, null, null, null);
-            cursor.moveToFirst();
-
-            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            String picturePath = cursor.getString(columnIndex);
-            cursor.close();
-
-            CircleImageView cirImg = (CircleImageView) findViewById(R.id.profile_image);
-            cirImg.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-
-        }
-
-
-    }
 
     public void showDatePickerDialog() {
         DialogFragment newFragment = new DatePickerFragment();
@@ -256,6 +216,25 @@ public class Admin_AddEvent extends AppCompatActivity implements View.OnClickLis
 
         if(v == btnDate){
             showDatePickerDialog();
+        }
+
+        if (v == btnAddEvent){
+
+            String lvlSelect = "level";
+            switch (LEVELSELECTION){
+
+                case 0 : lvlSelect = "Level3Events";
+                    break;
+                case 1 : lvlSelect = "SurauEvents";
+                    break;
+                case 2 : lvlSelect = "LpsEvents";
+                    break;
+                case 3 : lvlSelect = "Level25Events";
+                    break;
+
+            }
+            createEvent(lvlSelect);
+
         }
     }
 
@@ -269,8 +248,19 @@ public class Admin_AddEvent extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         // On selecting a spinner item
-        int itemNo = parent.getSelectedItemPosition();
-        LEVELSELECTION = itemNo;
+
+        Spinner spinLvl = (Spinner) parent;
+        Spinner spinCS = (Spinner) parent;
+
+        if(spinLvl.getId() == R.id.spinner2){
+            LEVELSELECTION = parent.getSelectedItemPosition();
+        }
+
+        if(spinCS.getId() == R.id.spinnerCrowd){
+            CrowdStatus = parent.getSelectedItem().toString();
+            //Toast.makeText(this, "Status "+CROWDSTATUS, Toast.LENGTH_LONG).show();
+        }
+
     }
 
     @Override

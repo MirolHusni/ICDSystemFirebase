@@ -2,6 +2,8 @@ package my.edu.unikl.icdsystemfirebase;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,11 +51,31 @@ public class EventListViewAdapter extends BaseAdapter {
         TextView tvEvent = (TextView)itemView.findViewById(R.id.list_event);
         TextView tvEvDesc = (TextView)itemView.findViewById(R.id.list_evDesc);
         TextView tvEvDate = (TextView)itemView.findViewById(R.id.list_evDate);
+        TextView tvCrowdStatus = (TextView)itemView.findViewById(R.id.tvCrowdStatus);
+
 
 
         tvEvent.setText(lstEvent.get(i).getEvName());
         tvEvDesc.setText(lstEvent.get(i).getEvDesc());
         tvEvDate.setText(lstEvent.get(i).getEvDate());
+
+        tvCrowdStatus.setText(lstEvent.get(i).getEvCrowdStatus());
+
+        try {
+            if (lstEvent.get(i).getEvCrowdStatus().equals("Low")) {
+                tvCrowdStatus.setTextColor(Color.GREEN);
+            }
+            if (lstEvent.get(i).getEvCrowdStatus().equals("Medium")) {
+                tvCrowdStatus.setTextColor(Color.parseColor("#ff9900"));
+            }
+            if (lstEvent.get(i).getEvCrowdStatus().equals("High")) {
+                tvCrowdStatus.setTextColor(Color.RED);
+            }
+        }catch (Exception e){
+            Log.e("Error msg", e.getMessage());
+        }
+
+
 
         return itemView;
     }

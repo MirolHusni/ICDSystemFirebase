@@ -6,16 +6,17 @@ package my.edu.unikl.icdsystemfirebase;
 
 public class AdminEvent {
 
-    private String uid,evName,evDesc,evDate;
+    private String uid,evName,evDesc,evDate, evCrowdStatus;
 
     public AdminEvent() {
     }
 
-    public AdminEvent(String uid, String evName, String evDesc, String evDate) {
+    public AdminEvent(String uid, String evName, String evDesc, String evDate, String evCrowdStatus) {
         this.uid = uid;   // Primary key and key
         this.evName = evName;
         this.evDesc = evDesc;
         this.evDate = evDate;
+        this.evCrowdStatus = evCrowdStatus;
 
     }
 
@@ -49,5 +50,13 @@ public class AdminEvent {
 
     public void setEvDate(String evDate) {
         this.evDate = evDate;
+    }
+
+    public String getEvCrowdStatus() {
+        return evCrowdStatus;
+    }
+
+    public void setEvCrowdStatus(String evCrowdStatus) {
+        this.evCrowdStatus = evCrowdStatus;
     }
 }
