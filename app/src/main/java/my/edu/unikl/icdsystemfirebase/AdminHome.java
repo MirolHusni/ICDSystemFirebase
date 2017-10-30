@@ -32,9 +32,6 @@ public class AdminHome extends AppCompatActivity implements View.OnClickListener
         cvLogout.setOnClickListener(this);
     }
 
-    private void initFirebase(){
-        mFirebaseAuth = FirebaseAuth.getInstance();
-    }
 
     @Override
     public void onClick(View v) {
@@ -55,6 +52,11 @@ public class AdminHome extends AppCompatActivity implements View.OnClickListener
 
         if( v== cvLogout){
 
+            FirebaseAuth auth = FirebaseAuth.getInstance();
+            auth.signOut();
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+            Toast.makeText(this, "Successfully Log Out!", Toast.LENGTH_LONG).show();
         }
     }
 }

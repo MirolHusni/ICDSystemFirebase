@@ -107,6 +107,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
 
+                                    firebaseAuth.signOut();
                                     Intent intent = new Intent(
                                             RegisterActivity.this,
                                             LoginActivity.class);
