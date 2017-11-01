@@ -13,9 +13,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -38,6 +40,7 @@ public class Admin_AddEvent extends AppCompatActivity implements View.OnClickLis
     private Spinner spinnerLvl, spinnerCS;
     private ListView list_data;
     private Button btnDate , btnAddEvent;
+    private ImageView imgBackground;
     private ProgressBar circular_progress;
 
 
@@ -70,6 +73,8 @@ public class Admin_AddEvent extends AppCompatActivity implements View.OnClickLis
 
         spinnerCS = (Spinner) findViewById(R.id.spinnerCrowd);
         spinnerCS.setOnItemSelectedListener(this);
+
+        imgBackground = (ImageView) findViewById(R.id.imgAdminAddEvent);
 
         //Control
         circular_progress = (ProgressBar)findViewById(R.id.circular_progress);
@@ -254,6 +259,15 @@ public class Admin_AddEvent extends AppCompatActivity implements View.OnClickLis
 
         if(spinLvl.getId() == R.id.spinner2){
             LEVELSELECTION = parent.getSelectedItemPosition();
+
+            if(LEVELSELECTION == 0){
+                imgBackground.setImageResource(R.drawable.bg_lvl3);
+                imgBackground.startAnimation(AnimationUtils.loadAnimation(this, android.R.anim.fade_in));
+            }
+            if(LEVELSELECTION == 1){
+                imgBackground.setImageResource(R.drawable.bg_surau13);
+                imgBackground.startAnimation(AnimationUtils.loadAnimation(this, android.R.anim.fade_in));
+            }
         }
 
         if(spinCS.getId() == R.id.spinnerCrowd){

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +49,22 @@ public class EventRVadapter extends RecyclerView.Adapter<EventRVadapter.ViewHold
         viewHolder.evName.setText(lstEvent.get(i).getEvName());
         viewHolder.evDesc.setText(lstEvent.get(i).getEvDesc());
         viewHolder.evDate.setText(lstEvent.get(i).getEvDate());
+        viewHolder.evCrowdStat.setText(lstEvent.get(i).getEvCrowdStatus());
+
+
+        try {
+            if (lstEvent.get(i).getEvCrowdStatus().equals("Low")) {
+                viewHolder.evCrowdStat.setTextColor(Color.GREEN);
+            }
+            if (lstEvent.get(i).getEvCrowdStatus().equals("Medium")) {
+                viewHolder.evCrowdStat.setTextColor(Color.parseColor("#ff9900"));
+            }
+            if (lstEvent.get(i).getEvCrowdStatus().equals("High")) {
+                viewHolder.evCrowdStat.setTextColor(Color.RED);
+            }
+        }catch (Exception e){
+            Log.e("Error msg", e.getMessage());
+        }
         viewHolder.setClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position, boolean isLongClick) {
@@ -67,7 +84,7 @@ public class EventRVadapter extends RecyclerView.Adapter<EventRVadapter.ViewHold
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
-        TextView evName,evDesc,evDate;
+        TextView evName,evDesc,evDate, evCrowdStat;
         CardView cvEvenList;
         private ItemClickListener clickListener;
 
@@ -77,6 +94,7 @@ public class EventRVadapter extends RecyclerView.Adapter<EventRVadapter.ViewHold
             evName = (TextView) itemView.findViewById(R.id.eventName);
             evDesc = (TextView) itemView.findViewById(R.id.eventDesc);
             evDate = (TextView) itemView.findViewById(R.id.eventDate);
+            evCrowdStat = (TextView) itemView.findViewById(R.id.tvCrowdStatUser);
 
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);

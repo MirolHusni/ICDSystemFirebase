@@ -23,12 +23,28 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Finance Center"
+                        android:paddingLeft="50dp"
+                        android:paddingTop="10dp"
+                        android:textSize="20dp"
+                        android:textColor="#2898d0"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:weightSum="1">
 
                     <ImageView
-                        android:id="@+id/bgLevel25"
+                        android:id="@+id/imageView6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
@@ -52,7 +68,9 @@
                             android:layout_centerHorizontal="true" />
 
                     </RelativeLayout>
+
                 </LinearLayout>
+
 
             </android.support.v7.widget.CardView>
 
@@ -147,7 +165,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="20dp"
-                        android:text="Daily Time Graph"
+                        android:text="Daily Crowd Pattern"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                     <com.github.mikephil.charting.charts.HorizontalBarChart

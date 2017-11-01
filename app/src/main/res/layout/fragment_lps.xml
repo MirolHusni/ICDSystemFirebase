@@ -23,36 +23,54 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Library Printing Service"
+                        android:paddingLeft="50dp"
+                        android:paddingTop="10dp"
+                        android:textSize="20dp"
+                        android:textColor="#2898d0"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:weightSum="1">
 
                     <ImageView
-                        android:id="@+id/bgLps"
+                        android:id="@+id/imageView6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
-                        app:srcCompat="@drawable/ic_counter" />
+                        app:srcCompat="@drawable/ic_print" />
 
                     <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bg_surau">
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/nav_bg">
 
                         <TextView
                             android:id="@+id/tvLpsCounter"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/round_green"
+                            android:gravity="center"
                             android:text="0"
                             android:textSize="20dp"
-                            android:gravity="center"
-                            android:background="@drawable/round_green"
-                            android:textStyle="bold"
-                            android:layout_centerVertical="true"
-                            android:layout_centerHorizontal="true" />
+                            android:textStyle="bold" />
 
                     </RelativeLayout>
+
                 </LinearLayout>
+
 
             </android.support.v7.widget.CardView>
 
@@ -148,7 +166,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="20dp"
-                        android:text="Daily Time Graph"
+                        android:text="Daily Crowd Pattern"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                     <com.github.mikephil.charting.charts.HorizontalBarChart
