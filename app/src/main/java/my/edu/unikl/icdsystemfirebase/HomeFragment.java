@@ -139,8 +139,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     public void getPeopleCount() {
 
+        //Load people counter lvl3
             DatabaseReference databaseReference = mFirebaseDatabase.getInstance().getReference();
-            Query lastQuery = databaseReference.child("CountPeople").orderByKey().limitToLast(1);
+            Query lastQuery = databaseReference.child("CountPeople").child("Level3Counter").orderByKey().limitToLast(1);
             lastQuery.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -163,6 +164,88 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 }
             });
 
+        //Load people counter Surau
+        DatabaseReference dbRefSurau = mFirebaseDatabase.getInstance().getReference();
+        Query lastQuerySurau = dbRefSurau.child("CountPeople").child("SurauCounter").orderByKey().limitToLast(1);
+        lastQuerySurau.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot child: dataSnapshot.getChildren()) {
+                    Log.d("User key", child.getKey());
+                    Log.d("User val", child.child("PeopleCounter").getValue().toString());
+                    surauStatus.setText(child.child("PeopleCounter").getValue().toString());
+
+                    crowdStatusSurau(Integer.parseInt(child.child("PeopleCounter").getValue().toString()));
+
+                }
+
+
+                //Toast.makeText(getActivity().getApplicationContext() , message, Toast.LENGTH_LONG).show();
+            }
+
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        //Load people counter Lps
+        DatabaseReference dbRefLps = mFirebaseDatabase.getInstance().getReference();
+        Query lastQueryLps = dbRefLps.child("CountPeople").child("LpsCounter").orderByKey().limitToLast(1);
+        lastQueryLps.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot child: dataSnapshot.getChildren()) {
+                    Log.d("User key", child.getKey());
+                    Log.d("User val", child.child("PeopleCounter").getValue().toString());
+                    surauStatus.setText(child.child("PeopleCounter").getValue().toString());
+
+                    crowdStatusLps(Integer.parseInt(child.child("PeopleCounter").getValue().toString()));
+
+                }
+
+
+                //Toast.makeText(getActivity().getApplicationContext() , message, Toast.LENGTH_LONG).show();
+            }
+
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        //Load people counter Lvl25
+        DatabaseReference dbRefLvl25 = mFirebaseDatabase.getInstance().getReference();
+        Query lastQueryLvl25 = dbRefLvl25.child("CountPeople").child("Level25Counter").orderByKey().limitToLast(1);
+        lastQueryLvl25.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot child: dataSnapshot.getChildren()) {
+                    Log.d("User key", child.getKey());
+                    Log.d("User val", child.child("PeopleCounter").getValue().toString());
+                    lvl25Status.setText(child.child("PeopleCounter").getValue().toString());
+
+                    crowdStatusLvl25(Integer.parseInt(child.child("PeopleCounter").getValue().toString()));
+
+                }
+
+
+                //Toast.makeText(getActivity().getApplicationContext() , message, Toast.LENGTH_LONG).show();
+            }
+
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
 
 
     }
@@ -170,12 +253,60 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     public void crowdStatus(int status){
 
-        if(status < 1){
+        if(status >=0){
             lvl3Status.setBackground(getResources().getDrawable(R.drawable.round_green));
+            lvl3Status.startAnimation(AnimationUtils.loadAnimation(getContext(), android.R.anim.fade_in));
+        }else  if( status <=3){
+            lvl3Status.setBackground(getResources().getDrawable(R.drawable.round_orange));
             lvl3Status.startAnimation(AnimationUtils.loadAnimation(getContext(), android.R.anim.fade_in));
         }else  if( status >3){
             lvl3Status.setBackground(getResources().getDrawable(R.drawable.round_red));
             lvl3Status.startAnimation(AnimationUtils.loadAnimation(getContext(), android.R.anim.fade_in));
+        }
+
+    }
+
+    public void crowdStatusSurau(int status){
+
+        if(status >=0){
+            surauStatus.setBackground(getResources().getDrawable(R.drawable.round_green));
+            surauStatus.startAnimation(AnimationUtils.loadAnimation(getContext(), android.R.anim.fade_in));
+        }else  if(  status <=3){
+            surauStatus.setBackground(getResources().getDrawable(R.drawable.round_orange));
+            surauStatus.startAnimation(AnimationUtils.loadAnimation(getContext(), android.R.anim.fade_in));
+        }else  if( status >3){
+            surauStatus.setBackground(getResources().getDrawable(R.drawable.round_red));
+            surauStatus.startAnimation(AnimationUtils.loadAnimation(getContext(), android.R.anim.fade_in));
+        }
+
+    }
+
+    public void crowdStatusLps(int status){
+
+        if(status >=0){
+            lpsStatus.setBackground(getResources().getDrawable(R.drawable.round_green));
+            lpsStatus.startAnimation(AnimationUtils.loadAnimation(getContext(), android.R.anim.fade_in));
+        }else  if(  status <=3){
+            lpsStatus.setBackground(getResources().getDrawable(R.drawable.round_orange));
+            lpsStatus.startAnimation(AnimationUtils.loadAnimation(getContext(), android.R.anim.fade_in));
+        }else  if( status >3){
+            lpsStatus.setBackground(getResources().getDrawable(R.drawable.round_red));
+            lpsStatus.startAnimation(AnimationUtils.loadAnimation(getContext(), android.R.anim.fade_in));
+        }
+
+    }
+
+    public void crowdStatusLvl25(int status){
+
+        if(status >=0){
+            lvl25Status.setBackground(getResources().getDrawable(R.drawable.round_green));
+            lvl25Status.startAnimation(AnimationUtils.loadAnimation(getContext(), android.R.anim.fade_in));
+        }else  if(  status <=3){
+            lvl25Status.setBackground(getResources().getDrawable(R.drawable.round_orange));
+            lvl25Status.startAnimation(AnimationUtils.loadAnimation(getContext(), android.R.anim.fade_in));
+        }else  if( status >3){
+            lvl25Status.setBackground(getResources().getDrawable(R.drawable.round_red));
+            lvl25Status.startAnimation(AnimationUtils.loadAnimation(getContext(), android.R.anim.fade_in));
         }
 
     }
