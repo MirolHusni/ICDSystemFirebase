@@ -95,22 +95,29 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         pDialog.setMessage("Loggin in Please Wait...");
         pDialog.show();
 
-        //logging in the user
-        firebaseAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        pDialog.dismiss();
-                        //if the task is successfull
-                        if(task.isSuccessful()){
-                            //start the profile activity
-                            finish();
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        }else
-                            Toast.makeText(getApplicationContext(), "Incorrect email or password!", Toast.LENGTH_SHORT).show();
-                    }
-                });
 
+        if( email.equals("admin@icdsystem.com")){
+
+            startActivity(new Intent(getApplicationContext(), AdminHome.class));
+            Toast.makeText(this, "Admin", Toast.LENGTH_LONG).show();
+
+        }else {
+            //logging in the user
+            firebaseAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            pDialog.dismiss();
+                            //if the task is successfull
+                            if (task.isSuccessful()) {
+                                //start the profile activity
+                                finish();
+                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            } else
+                                Toast.makeText(getApplicationContext(), "Incorrect email or password!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
     }
 
     @Override

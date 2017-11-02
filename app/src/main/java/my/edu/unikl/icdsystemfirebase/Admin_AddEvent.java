@@ -268,6 +268,14 @@ public class Admin_AddEvent extends AppCompatActivity implements View.OnClickLis
                 imgBackground.setImageResource(R.drawable.bg_surau13);
                 imgBackground.startAnimation(AnimationUtils.loadAnimation(this, android.R.anim.fade_in));
             }
+            if(LEVELSELECTION == 2){
+                imgBackground.setImageResource(R.drawable.bg_lps);
+                imgBackground.startAnimation(AnimationUtils.loadAnimation(this, android.R.anim.fade_in));
+            }
+            if(LEVELSELECTION == 3){
+                imgBackground.setImageResource(R.drawable.bg_lvl25);
+                imgBackground.startAnimation(AnimationUtils.loadAnimation(this, android.R.anim.fade_in));
+            }
         }
 
         if(spinCS.getId() == R.id.spinnerCrowd){
@@ -279,7 +287,6 @@ public class Admin_AddEvent extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
     }
 }
 

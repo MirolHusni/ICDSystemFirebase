@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity
         // name, website
         txtName.setText(user.getDisplayName());
         txtWebsite.setText(user.getEmail());
-          Toast.makeText(this, "Get Display name" +user.getDisplayName(), Toast.LENGTH_LONG).show();
+         // Toast.makeText(this, "Welcome, " +user.getDisplayName(), Toast.LENGTH_LONG).show();
 
           // loading header background image
         Glide.with(this).load(urlNavHeaderBg)

@@ -124,7 +124,7 @@ public class Lvl3Fragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if(v == bttnSend) {
-            startActivity(new Intent(getContext(),Lvl3Chatroom.class));
+            startActivity(new Intent(getContext(), Lvl3Chatroom.class));
         }
     }
 

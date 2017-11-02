@@ -53,7 +53,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/nav_bg">
+                        android:background="@drawable/bg_lps">
 
                         <TextView
                             android:id="@+id/tvLpsCounter"

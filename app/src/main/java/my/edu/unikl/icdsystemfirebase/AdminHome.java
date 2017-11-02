@@ -20,6 +20,7 @@ public class AdminHome extends AppCompatActivity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_home);
+        setTitle("Administrator");
 
         cvAddEvent = (CardView) findViewById(R.id.cvaddevent);
         cvManageUser = (CardView) findViewById(R.id.cvmanageuser);
